@@ -25,7 +25,7 @@ class Window():
         self.height = height
         self.root_widget = Tk()
         self.root_widget.title("mazesolver")
-        self.canvas = Canvas()
+        self.canvas = Canvas(width=self.width, height=self.height)
         self.canvas.pack()
         self.is_running = False
         self.root_widget.protocol("WM_DELETE_WINDOW", self.close)
@@ -51,8 +51,8 @@ def main():
     win = Window(800, 600)
     p1 = Point(10, 100)
     p2 = Point(10, 10)
-    p3 = Point(180, 200)
-    p4 = Point(8, 1)
+    p3 = Point(0, 0)
+    p4 = Point(800, 600)
     p5 = Point(100, 700)
     p6 = Point(17, 90)
     l1 = Line(p1, p2)
