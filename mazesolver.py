@@ -48,6 +48,16 @@ class Cell():
         for s in sides:
             self._window.draw_line(s, "green")
 
+    def draw_move(self, to_cell, undo=False):
+        start = Point(self._x1 + 0.5, self._y1 + 0.5)
+        end = Point(to_cell._x1 + 0.5, to_cell._y1 + 0.5)
+        line = Line(start, end)
+        if undo:
+            color = "gray"
+        else:
+            color = "red"
+        self._window.draw_line(line, color)
+
     def __repr__(self):
         return f"Cell({self._x1}, {self._y1}, {self._x2}, {self._y2}, {self.has_top}, {self.has_right}, {self.has_bottom}, {self.has_left})"
 
@@ -93,8 +103,8 @@ def main():
         Cell(600, 510, 601, 511, win, True, False, True, False),
         Cell(650, 510, 651, 511, win, False, False, False, False),
     ]
-    for c in cells:
-        c.draw()
+    for i in range(1, len(cells)):
+        cells[i - 1].draw_move(cells[i], False)
     win.wait_for_close()
 
 if __name__ == '__main__':
