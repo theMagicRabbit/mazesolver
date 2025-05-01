@@ -88,7 +88,6 @@ class Maze():
         self._animate()
     def _animate(self):
         self._win.redraw()
-        sleep(0.05)
 
 class Window():
     def __init__(self, width: int, height: int):
@@ -121,21 +120,8 @@ class Window():
 
 def main():
     win = Window(800, 600)
-    cells = [
-        Cell(110, 110, 111, 111, win, True, True, True, True),
-        Cell(700, 500, 701, 501, win, True, True, True, False),
-        Cell(100, 101, 101, 102, win, True, True, False, True),
-        Cell(200, 200, 201, 201, win, True, False, True, True),
-        Cell(300, 300, 301, 301, win, False, True, True, True),
-        Cell(400, 400, 401, 401, win, True, True, False, False),
-        Cell(500, 500, 501, 501, win, True, False, False, False),
-        Cell(600, 510, 601, 511, win, True, False, True, False),
-        Cell(650, 510, 651, 511, win, False, False, False, False),
-    ]
-    for i in range(1, len(cells)):
-        cells[i - 1].draw_move(cells[i], False)
+    maze = Maze(0, 0, 800, 600, 1, 1, win)
     win.wait_for_close()
 
 if __name__ == '__main__':
     main()
-line
