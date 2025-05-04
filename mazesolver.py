@@ -21,7 +21,7 @@ class Line():
         return f"Line({self.p1}, {self.p2})"
 
 class Cell():
-    def __init__(self, x1, y1, x2, y2, window, top_side=True, right_side=True, bottom_side=True, left_side=True):
+    def __init__(self, x1, y1, x2, y2, window=None, top_side=True, right_side=True, bottom_side=True, left_side=True):
         self.has_top = top_side
         self.has_right = right_side
         self.has_bottom = bottom_side
@@ -63,7 +63,7 @@ class Cell():
         return f"Cell({self._x1}, {self._y1}, {self._x2}, {self._y2}, {self.has_top}, {self.has_right}, {self.has_bottom}, {self.has_left})"
 
 class Maze():
-    def __init__(self, x1, y1, num_rows, num_cols, cell_size_x, cell_size_y, win):
+    def __init__(self, x1, y1, num_rows, num_cols, cell_size_x, cell_size_y, win=None):
         self._x1 = x1
         self._y1 = y1
         self._num_rows = num_rows
