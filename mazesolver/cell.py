@@ -30,8 +30,10 @@ class Cell():
             self._window.draw_line(s, "green")
 
     def draw_move(self, to_cell, undo=False):
-        start = Point(self._x1 + 0.5, self._y1 + 0.5)
-        end = Point(to_cell._x1 + 0.5, to_cell._y1 + 0.5)
+        dx = (x2 - x1) / 2
+        dy = (y2 - y1) / 2
+        start = Point(self._x1 + abs(dx), self._y1 + abs(dy))
+        end = Point(to_cell._x1 + abs(dx), to_cell._y1 + abs(dy))
         line = Line(start, end)
         if undo:
             color = "gray"

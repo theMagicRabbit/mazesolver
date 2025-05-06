@@ -7,7 +7,7 @@ class Line():
         self.p2 = p2
 
     def draw(self, canvas: Canvas, line_color: str):
-        canvas.create_line((self.p1.x, self.p1.y), (self.p2.x, self.p2.y), fill=line_color, width=16)
+        canvas.create_line((self.p1.x, self.p1.y), (self.p2.x, self.p2.y), fill=line_color, width=2)
 
     def __repr__(self):
         return f"Line({self.p1}, {self.p2})"
