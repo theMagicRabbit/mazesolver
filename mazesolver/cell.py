@@ -27,7 +27,7 @@ class Cell():
         if self.has_bottom:
             sides.append(Line(self.bottom_left, self.bottom_right))
         for s in sides:
-            self._window.draw_line(s, "green")
+            self._window.draw_line(s, "black")
 
     def draw_move(self, to_cell, undo=False):
         dx = (x2 - x1) / 2

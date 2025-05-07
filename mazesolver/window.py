@@ -25,8 +25,8 @@ class Window():
         self.is_running = False
 
     def draw_line(self, line: Line, fill_color: str):
-        print(line)
         line.draw(self.canvas, fill_color)
+
     def __repr__(self):
         return f"Window({self.width}, {self.height})"
 
