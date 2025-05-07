@@ -18,16 +18,15 @@ class Cell():
 
     def draw(self):
         sides = []
-        if self.has_top:
-            sides.append(Line(self.top_left, self.top_right))
-        if self.has_left:
-            sides.append(Line(self.top_left, self.bottom_left))
-        if self.has_right:
-            sides.append(Line(self.top_right, self.bottom_right))
-        if self.has_bottom:
-            sides.append(Line(self.bottom_left, self.bottom_right))
-        for s in sides:
-            self._window.draw_line(s, "black")
+        sides.append((self.has_top, Line(self.top_left, self.top_right)))
+        sides.append((self.has_left, Line(self.top_left, self.bottom_left)))
+        sides.append((self.has_right, Line(self.top_right, self.bottom_right)))
+        sides.append((self.has_bottom, Line(self.bottom_left, self.bottom_right)))
+        for is_vis, side in sides:
+            if is_vis:
+                self._window.draw_line(side, "black")
+            else:
+                self._window.draw_line(side, "white")
 
     def draw_move(self, to_cell, undo=False):
         dx = (x2 - x1) / 2
