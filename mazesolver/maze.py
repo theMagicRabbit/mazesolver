@@ -35,6 +35,10 @@ class Maze():
     def _animate(self):
         self._win.redraw()
 
+    def _break_entrance_and_exit(self):
+        self._cells[0][0].has_top = False
+        self._cells[-1][-1].has_bottom = False
+
     def __repr__(self):
         return f"Maze({self._x1}, {self._y1}, {self._num_rows}, {self._num_cols}, {self._cell_size_x}, {self._cell_size_y}, {self._win})"
 
