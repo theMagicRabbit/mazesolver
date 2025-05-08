@@ -1,5 +1,6 @@
 from mazesolver import Cell
 from random import seed
+from time import sleep
 
 class Maze():
     def __init__(self, x1, y1, num_rows, num_cols, cell_size_x, cell_size_y, win=None, seed=None):
@@ -18,14 +19,14 @@ class Maze():
 
     def _create_cells(self):
         self._cells = []
-        for y in range(self._num_cols):
+        for i in range(self._num_rows):
             row = []
-            dy = self._cell_size_y * y
-            current_y = self._y1 + dy
-            for x in range(self._num_rows):
-                dx = self._cell_size_x * x
-                current_x = self._x1 + dx
-                row.append(Cell(current_x, current_y, current_x + self._cell_size_x, current_y + self._cell_size_y, self._win))
+            dx = self._cell_size_x * i
+            current_i = self._x1 + dx
+            for j in range(self._num_cols):
+                dy = self._cell_size_y * j
+                current_j = self._y1 + dy
+                row.append(Cell(current_i, current_j, current_i + self._cell_size_x, current_j + self._cell_size_y, self._win))
             self._cells.append(row)
         if self._win:
             for i in range(len(self._cells)):
@@ -39,6 +40,7 @@ class Maze():
 
     def _animate(self):
         self._win.redraw()
+        sleep(0.05)
 
     def _break_entrance_and_exit(self):
         first = self._cells[0][0]
@@ -48,6 +50,14 @@ class Maze():
         last = self._cells[-1][-1]
         last.has_bottom = False
         last.draw()
+
+    def _break_walls_r(self, i, j):
+        pass
+        self.visited = True
+        while True:
+            to_visit = []
+            
+
 
 
     def __repr__(self):
