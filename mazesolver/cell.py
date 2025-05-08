@@ -26,7 +26,7 @@ class Cell():
             if is_vis:
                 self._window.draw_line(side, "black")
             else:
-                self._window.draw_line(side, "white")
+                self._window.draw_line(side, "#d9d9d9")
 
     def draw_move(self, to_cell, undo=False):
         dx = (x2 - x1) / 2
