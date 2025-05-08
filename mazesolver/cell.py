@@ -14,6 +14,7 @@ class Cell():
         self.top_right = Point(x2, y1)
         self.bottom_left = Point(x1, y2)
         self.bottom_right = Point(x2, y2)
+        self.visited = False
         self._window = window
 
     def draw(self):
