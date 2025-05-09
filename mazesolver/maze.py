@@ -1,5 +1,5 @@
 from mazesolver import Cell
-from random import seed
+from random import seed, randrange
 from time import sleep
 
 class Maze():
@@ -16,6 +16,7 @@ class Maze():
 
         self._create_cells()
         self._break_entrance_and_exit()
+        self._break_walls_r(0, 0)
 
     def _create_cells(self):
         self._cells = []
@@ -34,13 +35,12 @@ class Maze():
                     self._draw_cell(i, j)
 
     def _draw_cell(self, i, j):
-        print(self._cells[i][j])
         self._cells[i][j].draw()
         self._animate()
 
     def _animate(self):
         self._win.redraw()
-        sleep(0.05)
+        sleep(0.01)
 
     def _break_entrance_and_exit(self):
         first = self._cells[0][0]
@@ -52,11 +52,39 @@ class Maze():
         last.draw()
 
     def _break_walls_r(self, i, j):
-        pass
-        self.visited = True
+        self._cells[i][j].visited = True
         while True:
+            print(self._cells[i][j])
             to_visit = []
-            
+            if i - 1 >= 0 and not self._cells[i - 1][j].visited:
+                to_visit.append((i - 1, j, 'left'))
+            if j+1 < len(self._cells[i]) and not self._cells[i][j + 1].visited:
+                to_visit.append((i, j + 1, 'up'))
+            if i+1 < len(self._cells) and not self._cells[i + 1][j].visited:
+                to_visit.append((i + 1, j, 'right'))
+            if j >= 0 and not self._cells[i][j - 1].visited:
+                to_visit.append((i, j - 1, 'down'))
+
+            if not to_visit:
+                self._draw_cell(i, j)
+                return
+            next_cell_index = randrange(0, len(to_visit), 1)
+
+            next_i, next_j, direction = to_visit[next_cell_index] 
+            match direction:
+                case 'left':
+                    self._cells[i][j].has_left = False
+                    self._cells[next_i][next_j].has_right = False
+                case 'up':
+                    self._cells[i][j].has_top = False
+                    self._cells[next_i][next_j].has_bottom = False
+                case 'right':
+                    self._cells[i][j].has_right = False
+                    self._cells[next_i][next_j].has_left = False
+                case 'down':
+                    self._cells[i][j].has_down = False
+                    self._cells[next_i][next_j].has_up = False
+            self._break_walls_r(next_i, next_j)
 
 
 
