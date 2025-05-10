@@ -11,6 +11,7 @@ def main():
     cell_size_y = (y - 2 * margin) / num_rows
     win = Window(x, y)
     maze = Maze(margin, margin, num_rows, num_cols, cell_size_x, cell_size_y, win, 1)
+    maze.solve()
     win.wait_for_close()
 
 if __name__ == '__main__':

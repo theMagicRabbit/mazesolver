@@ -44,8 +44,9 @@ class Maze():
         self._animate()
 
     def _animate(self):
-        if self._win:
-            self._win.redraw()
+        if not self._win:
+            return
+        self._win.redraw()
         sleep(0.03)
 
     def _break_entrance_and_exit(self):
@@ -94,6 +95,41 @@ class Maze():
             for cell in col:
                 cell.visited = False
 
+    def _solve_r(self, i: int, j: int):
+        self._animate()
+        self._cells[i][j].visited = True
+        if i == self._num_cols - 1 and j == self._num_rows -1:
+            return True
+        for d in ["left", "up", "right", "down"]:
+            match d:
+                case "left":
+                    if i > 0 and not self._cells[i][j].has_left and not self._cells[i - 1][j].visited:
+                        self._cells[i][j].draw_move(self._cells[i - 1][j])
+                        if self._solve_r(i - 1, j):
+                            return True
+                        self._cells[i][j].draw_move(self._cells[i - 1][j], undo=True)
+                case "up":
+                    if j > 0 and not self._cells[i][j].has_top and not self._cells[i][j - 1].visited:
+                        self._cells[i][j].draw_move(self._cells[i][j - 1])
+                        if self._solve_r(i, j - 1):
+                            return True
+                        self._cells[i][j].draw_move(self._cells[i][j - 1], undo=True)
+                case "right":
+                    if i < self._num_cols - 1 and not self._cells[i][j].has_right and not self._cells[i + 1][j].visited:
+                        self._cells[i][j].draw_move(self._cells[i + 1][j])
+                        if self._solve_r(i + 1, j):
+                            return True
+                        self._cells[i][j].draw_move(self._cells[i + 1][j], undo=True)
+                case "down":
+                    if j < self._num_rows - 1 and not self._cells[i][j].has_bottom and not self._cells[i][j + 1].visited:
+                        self._cells[i][j].draw_move(self._cells[i][j + 1])
+                        if self._solve_r(i, j + 1):
+                            return True
+                        self._cells[i][j].draw_move(self._cells[i][j + 1], undo=True)
+        return False
+
+    def solve(self):
+        return self._solve_r(0, 0)
 
     def __repr__(self):
         return f"Maze({self._x1}, {self._y1}, {self._num_rows}, {self._num_cols}, {self._cell_size_x}, {self._cell_size_y}, {self._win})"
