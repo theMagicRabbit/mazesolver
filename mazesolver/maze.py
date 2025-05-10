@@ -100,7 +100,7 @@ class Maze():
         self._cells[i][j].visited = True
         if i == self._num_cols - 1 and j == self._num_rows -1:
             return True
-        for d in ["left", "up", "right", "down"]:
+        for d in ["right", "down", "left", "up"]:
             match d:
                 case "left":
                     if i > 0 and not self._cells[i][j].has_left and not self._cells[i - 1][j].visited:
