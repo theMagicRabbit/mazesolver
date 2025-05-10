@@ -19,8 +19,8 @@ class Cell():
         self._x2 = x2
         self._y1 = y1
         self._y2 = y2
-        sides.append((self.has_top, Line(Point(x1, y1), Point(x1, y2))))
-        sides.append((self.has_left, Line(Point(x1, y1), Point(x2, y1))))
+        sides.append((self.has_top, Line(Point(x1, y1), Point(x2, y1))))
+        sides.append((self.has_left, Line(Point(x1, y1), Point(x1, y2))))
         sides.append((self.has_right, Line(Point(x2, y1), Point(x2, y2))))
         sides.append((self.has_bottom, Line(Point(x1, y2), Point(x2, y2))))
         for is_vis, side in sides:
@@ -49,4 +49,8 @@ class Cell():
 
     def __repr__(self):
         return f"Cell({self._win})"
+
+    def __str__(self):
+        return (f"Cell({self.has_top}, {self.has_right}, {self.has_bottom}, {self.has_left}, "
+                f"{self._x1}, {self._x2}, {self._y1}, {self._y2}, {self.visited})")
 
