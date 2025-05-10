@@ -2,13 +2,15 @@ from mazesolver import Window, Maze
 from math import floor
 
 def main():
-    x = 802
-    y = 602
-    cell_size = 25
-    cols = floor(800 / cell_size)
-    rows = floor(600 / cell_size)
+    num_cols = 16
+    num_rows = 12
+    x = 800
+    y = 600
+    margin = 50
+    cell_size_x = (x - 2 * margin) / num_cols
+    cell_size_y = (y - 2 * margin) / num_rows
     win = Window(x, y)
-    maze = Maze(1, 1, cols, rows, cell_size, cell_size, win)
+    maze = Maze(margin, margin, num_rows, num_cols, cell_size_x, cell_size_y, win)
     win.wait_for_close()
 
 if __name__ == '__main__':
