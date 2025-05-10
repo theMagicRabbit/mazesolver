@@ -48,5 +48,5 @@ class Cell():
         self._win.draw_line(line, color)
 
     def __repr__(self):
-        return f"Cell({self._x1}, {self._y1}, {self._x2}, {self._y2}, {self.has_top}, {self.has_right}, {self.has_bottom}, {self.has_left})"
+        return f"Cell({self._win})"
 
